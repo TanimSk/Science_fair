@@ -25,6 +25,9 @@ void setup() {
   pinMode(2, OUTPUT);//IN1
   pinMode(3, OUTPUT);//IN2
 
+  //Buzzer
+  pinMode(11, OUTPUT);
+
 
   //push air
   pinMode(5, OUTPUT);//pwm 
@@ -47,6 +50,7 @@ void setup() {
   digitalWrite(3, LOW);
   digitalWrite(5, LOW);
   digitalWrite(7, LOW);
+  digitalWrite(11, LOW);
   
 }
 
@@ -63,7 +67,12 @@ void loop() {
 
   if(distance < dist && distance > 0){
     lcd.print("Hand detected!");
-    delay(1500);
+    
+    digitalWrite(11, HIGH);//beep_on
+    delay(1000);
+    digitalWrite(11, LOW);//beep_off
+    
+    delay(600);
     
     digitalWrite(2, HIGH); //r_motor on
     delay(750);
@@ -73,6 +82,10 @@ void loop() {
     lcd.clear();
     lcd.setCursor(2,0);
     lcd.print("injecting");
+    
+    digitalWrite(11, HIGH);//beep_on
+    delay(1000);
+    digitalWrite(11, LOW);//beep_off
 
     while(1){
       i++;
@@ -97,7 +110,9 @@ void loop() {
       }
     }
 
-    
+    digitalWrite(11, HIGH);//beep_on
+    delay(1000);
+    digitalWrite(11, LOW);//beep_off
     
     delay(1000);
     lcd.clear();
@@ -111,6 +126,10 @@ void loop() {
     delay(1000);
 
     digitalWrite(3, LOW);
+
+    digitalWrite(11, HIGH);//beep_on
+    delay(1000);
+    digitalWrite(11, LOW);//beep_off
 
     lcd.clear();
     delay(100);

@@ -18,22 +18,22 @@ int Time2 = 0;
 
 void setup() {
   //ultrasonic
-  pinMode(6, INPUT); //echo
-  pinMode(7, OUTPUT); // trigger
+  pinMode(0, INPUT); //echo_D3
+  pinMode(2, OUTPUT); //trigger_D4
 
   ///motor controller
-  pinMode(2, OUTPUT);//IN1
-  pinMode(3, OUTPUT);//IN2
+  pinMode(13, OUTPUT);//IN1_D7
+  pinMode(15, OUTPUT);//IN2_D8
 
   //Buzzer
-  pinMode(11, OUTPUT);
+  pinMode(12, OUTPUT);//D6
 
 
   //push air
-  pinMode(5, OUTPUT);//pwm 
+  pinMode(14, OUTPUT);//pwm_D5
   
   //servo motor
-  servo.attach(10);  
+  servo.attach(5);  
   servo.write(0);
   delay(1500);
 
@@ -46,46 +46,47 @@ void setup() {
   lcd.clear();
 
   //initial state
+  digitalWrite(0, LOW);
   digitalWrite(2, LOW);
-  digitalWrite(3, LOW);
-  digitalWrite(5, LOW);
-  digitalWrite(7, LOW);
-  digitalWrite(11, LOW);
+  digitalWrite(12, LOW);
+  digitalWrite(13, LOW);
+  digitalWrite(14, LOW);
+  digitalWrite(15, LOW);
   
 }
 
 void loop() {
-  digitalWrite(7, LOW);
+  digitalWrite(2, LOW);
   delayMicroseconds(2);
-  digitalWrite(7, HIGH);    //trigger
+  digitalWrite(2, HIGH);    //trigger
   delayMicroseconds(2);
-  digitalWrite(7, LOW);
+  digitalWrite(2, LOW);
 
-  duration = pulseIn(6, HIGH);
+  duration = pulseIn(0, HIGH);
   distance = 332*(duration/10000); //cm*2
   distance = (distance/2); //cm
 
   if(distance < dist && distance > 0){
     lcd.print("Hand detected!");
     
-    digitalWrite(11, HIGH);//beep_on
+    digitalWrite(12, HIGH);//beep_on
     delay(1000);
-    digitalWrite(11, LOW);//beep_off
+    digitalWrite(12, LOW);//beep_off
     
     delay(600);
     
-    digitalWrite(2, HIGH); //r_motor on
+    digitalWrite(13, HIGH); //r_motor on
     delay(750);
     
-    digitalWrite(2, LOW); //r_motor off
+    digitalWrite(13, LOW); //r_motor off
     
     lcd.clear();
     lcd.setCursor(2,0);
     lcd.print("injecting");
     
-    digitalWrite(11, HIGH);//beep_on
+    digitalWrite(12, HIGH);//beep_on
     delay(1000);
-    digitalWrite(11, LOW);//beep_off
+    digitalWrite(12, LOW);//beep_off
 
     while(1){
       i++;
@@ -96,9 +97,9 @@ void loop() {
       }
     }
 
-    digitalWrite(5, HIGH); // if ! Use analogWrite
+    digitalWrite(14, HIGH); // if ! Use analogWrite
     delay(1200);
-    digitalWrite(5, LOW);
+    digitalWrite(14, LOW);
     delay(400);
     
     while(1){
@@ -110,9 +111,9 @@ void loop() {
       }
     }
 
-    digitalWrite(11, HIGH);//beep_on
+    digitalWrite(12, HIGH);//beep_on
     delay(1000);
-    digitalWrite(11, LOW);//beep_off
+    digitalWrite(12, LOW);//beep_off
     
     delay(1000);
     lcd.clear();
@@ -122,14 +123,14 @@ void loop() {
     lcd.print("Have a good day");
     delay(1500);
     
-    digitalWrite(3, HIGH);//motor return
+    digitalWrite(15, HIGH);//motor return
     delay(1000);
 
-    digitalWrite(3, LOW);
+    digitalWrite(15, LOW);
 
-    digitalWrite(11, HIGH);//beep_on
+    digitalWrite(12, HIGH);//beep_on
     delay(1000);
-    digitalWrite(11, LOW);//beep_off
+    digitalWrite(12, LOW);//beep_off
 
     lcd.clear();
     delay(100);

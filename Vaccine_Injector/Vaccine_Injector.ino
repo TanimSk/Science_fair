@@ -5,10 +5,10 @@
 LiquidCrystal_I2C lcd(0x27, 16, 2) ;
 Servo servo;
 
-uint8_t a = 1;
+uint8_t a = 1; //state
 
 int dist = 7;//cm
-int a = 0;//angle
+int i = 0;//angle
 int cur = 0;//cursor pos
 
 int duration = 0;
@@ -59,7 +59,7 @@ void loop() {
 
   duration = pulseIn(6, HIGH);
   distance = 332*(duration/10000); //cm*2
-  distance = (distance/2) //cm
+  distance = (distance/2); //cm
 
   if(distance < dist && distance > 0){
     lcd.print("Hand detected!");
@@ -117,7 +117,7 @@ void loop() {
   }
 
   lcd.setCursor(0, 0);
-  lcd.print("Vaccine Injector")
+  lcd.print("Vaccine Injector");
 
   Time1 = millis();
 

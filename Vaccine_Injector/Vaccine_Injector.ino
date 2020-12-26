@@ -26,14 +26,14 @@ void setup() {
   pinMode(15, OUTPUT);//IN2_D8
 
   //Buzzer
-  pinMode(12, OUTPUT);//D6
+  pinMode(16, OUTPUT);//D0
 
 
   //push air
-  pinMode(14, OUTPUT);//pwm_D5
+  pinMode(12, OUTPUT);//D6
   
   //servo motor
-  servo.attach(5);  
+  servo.attach(14);//D5
   servo.write(0);
   delay(1500);
 
@@ -50,8 +50,8 @@ void setup() {
   digitalWrite(2, LOW);
   digitalWrite(12, LOW);
   digitalWrite(13, LOW);
-  digitalWrite(14, LOW);
   digitalWrite(15, LOW);
+  digitalWrite(16, LOW);
   
 }
 
@@ -69,9 +69,9 @@ void loop() {
   if(distance < dist && distance > 0){
     lcd.print("Hand detected!");
     
-    digitalWrite(12, HIGH);//beep_on
+    digitalWrite(16, HIGH);//beep_on
     delay(1000);
-    digitalWrite(12, LOW);//beep_off
+    digitalWrite(16, LOW);//beep_off
     
     delay(600);
     
@@ -84,9 +84,9 @@ void loop() {
     lcd.setCursor(2,0);
     lcd.print("injecting");
     
-    digitalWrite(12, HIGH);//beep_on
+    digitalWrite(16, HIGH);//beep_on
     delay(1000);
-    digitalWrite(12, LOW);//beep_off
+    digitalWrite(16, LOW);//beep_off
 
     while(1){
       i++;
@@ -97,9 +97,9 @@ void loop() {
       }
     }
 
-    digitalWrite(14, HIGH); // if ! Use analogWrite
+    digitalWrite(12, HIGH); // if ! Use analogWrite
     delay(1200);
-    digitalWrite(14, LOW);
+    digitalWrite(12, LOW);
     delay(400);
     
     while(1){
@@ -111,9 +111,9 @@ void loop() {
       }
     }
 
-    digitalWrite(12, HIGH);//beep_on
+    digitalWrite(16, HIGH);//beep_on
     delay(1000);
-    digitalWrite(12, LOW);//beep_off
+    digitalWrite(16, LOW);//beep_off
     
     delay(1000);
     lcd.clear();
@@ -128,9 +128,9 @@ void loop() {
 
     digitalWrite(15, LOW);
 
-    digitalWrite(12, HIGH);//beep_on
+    digitalWrite(16, HIGH);//beep_on
     delay(1000);
-    digitalWrite(12, LOW);//beep_off
+    digitalWrite(16, LOW);//beep_off
 
     lcd.clear();
     delay(100);

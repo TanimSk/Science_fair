@@ -147,17 +147,4 @@ void loop() {
   }
 
   
-  
-  if((Time1 - Time2) == 800){
-    lcd.clear();
-    lcd.setCursor(cur, 1);
-    lcd.print("Save the world");
-    cur++;
-    a = 1;
-    if(cur==15){
-      cur = 0;
-    }
-     
-   }
-  
 }

@@ -1,0 +1,183 @@
+/*! bulma.io v0.9.3 | MIT License | github.com/jgthms/bulma */
+.table:not(:last-child) {
+    margin-bottom: 1.5rem;
+} /*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+body,
+h1,
+html {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 100%;
+    font-weight: 400;
+}
+html {
+    box-sizing: border-box;
+}
+*,
+::after,
+::before {
+    box-sizing: inherit;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+td,
+th {
+    padding: 0;
+}
+td:not([align]),
+th:not([align]) {
+    text-align: inherit;
+}
+html {
+    background-color: #fff;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    min-width: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+body {
+    font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        Helvetica, Arial, sans-serif;
+}
+body {
+    color: #4a4a4a;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+}
+span {
+    font-style: inherit;
+    font-weight: inherit;
+}
+table td,
+table th {
+    vertical-align: top;
+}
+table td:not([align]),
+table th:not([align]) {
+    text-align: inherit;
+}
+table th {
+    color: #363636;
+}
+.button.is-focused:not(:active),
+.button:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+}
+.button.is-white.is-focused:not(:active),
+.button.is-white:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(255, 255, 255, 0.25);
+}
+.button.is-black.is-focused:not(:active),
+.button.is-black:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(10, 10, 10, 0.25);
+}
+.button.is-light.is-focused:not(:active),
+.button.is-light:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(245, 245, 245, 0.25);
+}
+.button.is-dark.is-focused:not(:active),
+.button.is-dark:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(54, 54, 54, 0.25);
+}
+.button.is-primary.is-focused:not(:active),
+.button.is-primary:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+}
+.button.is-link.is-focused:not(:active),
+.button.is-link:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(72, 95, 199, 0.25);
+}
+.button.is-info.is-focused:not(:active),
+.button.is-info:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(62, 142, 208, 0.25);
+}
+.button.is-success.is-focused:not(:active),
+.button.is-success:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(72, 199, 142, 0.25);
+}
+.button.is-warning.is-focused:not(:active),
+.button.is-warning:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(255, 224, 138, 0.25);
+}
+.button.is-danger.is-focused:not(:active),
+.button.is-danger:focus:not(:active) {
+    box-shadow: 0 0 0 0.125em rgba(241, 70, 104, 0.25);
+}
+.table {
+    background-color: #fff;
+    color: #363636;
+}
+.table td,
+.table th {
+    border: 1px solid #dbdbdb;
+    border-width: 0 0 1px;
+    padding: 0.5em 0.75em;
+    vertical-align: top;
+}
+.table th {
+    color: #363636;
+}
+.table th:not([align]) {
+    text-align: inherit;
+}
+.table tbody {
+    background-color: transparent;
+}
+.table tbody tr:last-child td {
+    border-bottom-width: 0;
+}
+.table.is-bordered td,
+.table.is-bordered th {
+    border-width: 1px;
+}
+.table.is-bordered tr:last-child td {
+    border-bottom-width: 1px;
+}
+.select.is-white:not(:hover)::after {
+    border-color: #fff;
+}
+.select.is-black:not(:hover)::after {
+    border-color: #0a0a0a;
+}
+.select.is-light:not(:hover)::after {
+    border-color: #f5f5f5;
+}
+.select.is-dark:not(:hover)::after {
+    border-color: #363636;
+}
+.select.is-primary:not(:hover)::after {
+    border-color: #00d1b2;
+}
+.select.is-link:not(:hover)::after {
+    border-color: #485fc7;
+}
+.select.is-info:not(:hover)::after {
+    border-color: #3e8ed0;
+}
+.select.is-success:not(:hover)::after {
+    border-color: #48c78e;
+}
+.select.is-warning:not(:hover)::after {
+    border-color: #ffe08a;
+}
+.select.is-danger:not(:hover)::after {
+    border-color: #f14668;
+}
+@media screen and (min-width: 1024px) {
+    .navbar-link.is-active:not(:focus):not(:hover),
+    a.navbar-item.is-active:not(:focus):not(:hover) {
+        background-color: transparent;
+    }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+  <title>Health Report</title>
+
+
+
+  <style media="screen">
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    table caption {
+      font-size: 1.5em;
+      margin: .5em 0 .75em;
+    }
+
+    table tr {
+      background-color: #eeeeee8c;
+      border: 1px solid #fff;
+      padding: .35em;
+    }
+
+    table th,
+    table td {
+      padding: .625em;
+      text-align: center;
+    }
+
+    table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 600px) {
+      table {
+        border: 0;
+      }
+
+      table caption {
+        font-size: 1.3em;
+      }
+
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+      }
+
+      table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+      }
+
+      table td::before {
+        /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      table td:last-child {
+        border-bottom: 0;
+      }
+    }
+
+    /* general styling */
+    body {
+      font-family: 'Ubuntu';
+      line-height: 1.25;
+      background-image: url('https://images.unsplash.com/photo-1588345921523-c2dcdb7f1dcd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed; 
+    }
+    .head{
+      box-shadow: 0px .2px 3px #888;
+      border-bottom-left-radius: 60%;
+      border-bottom-right-radius: 60%;
+      background-color: #2330404a;
+      padding: 1px;
+      box-shadow: 2px 5px 10px .1px #b5b5b5;
+      margin-top: -1em;
+      margin-right: -.5em;
+      margin-left: -.5em;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="head">
+    <h1 style="text-align:center; color: white;">
+      Health Report
+    </h1>
+  </div>
+
+  <br><br>
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Phone No.</th>
+        <th scope="col">Body Temp.</th>
+        <th scope="col">Heart Rate & SpO2</th>
+        <th scope="col">Eye Lens</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+
+    <tbody id="report">
+    </tbody>
+  </table>
+  <br><br>
+  <a href="/admin" style="font-weight: bold;">Admin</a>
+  <br>
+</body>
+<!-- ✅ -->
+<!-- &#128308; -->
+
+<script type="text/javascript">
+  let report = document.getElementById('report');
+  {%for cont in content %}
+
+    report.innerHTML += `
+    <tr>
+      <td data-label="ID">{{ cont.id }}</td>
+      <td data-label="Phone No.">{{ cont.phone_no }}</td>
+      <td data-label="Body Temp.">{{ cont.temperature }}</td>
+      <td data-label="Heart Rate & SpO2">{{ cont.heart_rate }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ cont.spo2 }}</td>
+      <td data-label="Eye Lens">{{ cont.eye_lens }}</td>
+      <td data-label="Status">✅</td>
+    </tr>
+    `;
+
+  {% endfor %}
+</script>
+
+
+</html>

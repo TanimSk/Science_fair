@@ -3,7 +3,6 @@
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
 #include "MAX30105.h"
-#include "heartRate.h"
 #include "spo2_algorithm.h"
 
 Servo myservo1;//temp hand 11
@@ -11,37 +10,21 @@ Servo myservo2;//max3102 hand 10
 Servo myservo3; //medicine hand 9
 Servo myservo4; // glass hand 3
 
-//Heart rate
-const byte RATE_SIZE = 4; //Increase this for more averaging. 4 is good.
-byte rates[RATE_SIZE]; //Array of heart rates
-byte rateSpot = 0;
-long lastBeat = 0; //Time at which the last beat occurred
 
-float beatsPerMinute;
-int beatAvg;
-float hr = 0.0;
-
-
-///////////  SPO2 Sensor  ///////////
+///////////  SPO2 Sensor + Heart Rate ///////////
 #define MAX_BRIGHTNESS 255
 #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-uint16_t irBuffer[100]; //infrared LED sensor data
-uint16_t redBuffer[100];  //red LED sensor data
+uint16_t irBuffer[100];
+uint16_t redBuffer[100];
 #else
-uint32_t irBuffer[100]; //infrared LED sensor data
-uint32_t redBuffer[100];  //red LED sensor data
+uint32_t irBuffer[100];
+uint32_t redBuffer[100];
 #endif
-
-int32_t bufferLength; //data length
-int32_t spo2; //SPO2 value
-int8_t validSPO2; //indicator to show if the SPO2 calculation is valid
-int32_t heartRate; //heart rate value
-int8_t validHeartRate; //indicator to show if the heart rate calculation is valid
-
-byte pulseLED = 11; //Must be on PWM pin
-byte readLED = 13; //Blinks with each data read
-
-
+int32_t bufferLength
+int32_t spo2;
+int8_t validSPO2;
+int32_t heartRate;
+int8_t validHeartRate;
 
 
 //temperature A0 pin

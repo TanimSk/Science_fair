@@ -5,11 +5,25 @@ import os
 
 
 def get_precription(temperature, has_cough):
-    return "Paracitamol - napa extra"
+    pres = ""
+
+    if float(temperature) > 100:
+        pres += "Paracitamol - napa extra"
+        
+    if has_cough:
+        pres += "Alatrol"
+    
+    else:
+        pres = "No prescription needed"
+    
+    return pres
+    
 
 
 def print_report(phone_no, age, temperature, heart_rate, spo2, eye_lens, has_cough):
     
+    temp = temperature
+
     if temperature == "":
         temperature = "Not Tested"
     elif float(temperature) > 100.0:
@@ -33,11 +47,11 @@ def print_report(phone_no, age, temperature, heart_rate, spo2, eye_lens, has_cou
         "O2_LEVEL" : spo2,
         "HEART_RATE" : heart_rate,
         "EYE_LENS": eye_lens,
-        "PRESCRIPTION" : get_precription(temperature, has_cough),
+        "PRESCRIPTION" : get_precription(temp, has_cough),
         "now_date" : str(date.today())
     }
 
-    f = open("./base.html", 'r')
+    f = open("base.html", 'r')
     html = f.read()
     f.close()
 
@@ -53,12 +67,13 @@ def print_report(phone_no, age, temperature, heart_rate, spo2, eye_lens, has_cou
     print("Done")
 
 
-# print_report(
-#     temperature="",
-#     phone_no="65165156",
-#     age="51",
-#     heart_rate="65",
-#     eye_lens="0.4",
-#     spo2="94",
-#     has_cough=False
-# )
+if __name__ == "__main__":
+    print_report(
+        temperature="",
+        phone_no="65165156",
+        age="51",
+        heart_rate="65",
+        eye_lens="0.4",
+        spo2="94",
+        has_cough=False
+    )

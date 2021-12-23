@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
-#include "MAX30105.h"
-#include "spo2_algorithm.h"
+// #include "MAX30105.h"
+// #include "spo2_algorithm.h"
 
 Servo myservo1;//temp hand 11
 Servo myservo2;//max3102 hand 10
@@ -12,19 +12,17 @@ Servo myservo4; // glass hand 3
 
 
 ///////////  SPO2 Sensor + Heart Rate ///////////
-#define MAX_BRIGHTNESS 255
-#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-uint16_t irBuffer[100];
-uint16_t redBuffer[100];
-#else
-uint32_t irBuffer[100];
-uint32_t redBuffer[100];
-#endif
-int32_t bufferLength
-int32_t spo2;
-int8_t validSPO2;
-int32_t heartRate;
-int8_t validHeartRate;
+// #define MAX_BRIGHTNESS 255
+// #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
+// uint16_t irBuffer[100];
+// uint16_t redBuffer[100];
+// #else
+// uint32_t irBuffer[100];
+// uint32_t redBuffer[100];
+// #endif
+// int32_t bufferLength;
+// int8_t validSPO2;
+// int8_t validHeartRate;
 
 
 //temperature A0 pin
@@ -51,7 +49,7 @@ Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS)
 
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-MAX30105 particleSensor;
+//MAX30105 particleSensor;
 
 
 
@@ -66,7 +64,8 @@ String Age = "";
 float Temp = 0.0;
 bool has_cough = false;
 float lens_power = 0.25;
-
+int32_t heartRate;
+int32_t spo2;
 
 
 float duration;
@@ -122,12 +121,13 @@ void loop() {
   if (distance < 65 && distance > 0) {
     // reset value
     has_cough = false;
-    hr = 0.0;
     Temp = 0.0;
     Phone_number = "";
     Age = "";
     lens_power = 0.25;
     seen_value = "";
+    heartRate = 0;
+    spo2 = 0;
     
 
     play_audio("1.mp3"); //welcome audio
@@ -302,11 +302,15 @@ void check_up() {
     delay(100);
     myservo2.write(0);
     delay(200);
-
-    hr = enable_sensor();
+    // enable_sensor();
     lcd.clear();
+    
     lcd.setCursor(0, 0);
-    lcd.print("hr: "+ String(hr));
+    lcd.print("hr: "+ String(heartRate));
+
+    lcd.setCursor(0, 1);
+    lcd.print("spo2: "+ String(spo2));
+
     myservo2.write(55);
   }
 
@@ -314,7 +318,7 @@ void check_up() {
     lcd.clear();
     lcd.print("Printing report");
     lcd.setCursor(2, 1);
-    send_data(Phone_number, Age, Temp, hr, 95, has_cough, lens_power);
+    send_data(Phone_number, Age, Temp, heartRate, spo2, has_cough, lens_power);
     delay(500);
     print_report();
     for (int cnt = 0; cnt < 10; cnt++) {

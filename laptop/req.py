@@ -2,17 +2,17 @@ import requests
 
 def send_data(phone_no, age, temperature, heart_rate, spo2, eye_lens, stat) -> None:
         
-        if temperature == "":
+        if float(temperature) == 0.0:
                 temperature = "Not Tested"
         elif float(temperature) > 100.0:
                 temperature += " *"
         
-        if spo2 == "":
+        if float(spo2) == 0.0:
                 spo2 = "Not Tested"
         elif float(spo2) < 95.0:
                 spo2 += " *"
         
-        if heart_rate == "":
+        if float(heart_rate) == 0.0:
                 heart_rate += " *"
         elif not (60.0<float(heart_rate)<100.0):
                 heart_rate += " *"

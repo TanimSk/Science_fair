@@ -1,7 +1,8 @@
 import req
 import transfer_data
 from pygame import mixer
-from .render_report import report
+import report
+import os
 
 mixer.init()
 mixer.music.set_volume(1)
@@ -42,20 +43,20 @@ while True:
         spo2 = data[5]
         has_cough = data[6]
         eye_lens = data[7]
-
-        print(body_temp, phone_number)
+        
+        print(has_cough)
 
 
     elif data[0] == "audio":
         path = data[1]
         print(f"now playing audio: {data[1]}")
-        mixer.music.load(path)
+        mixer.music.load(f"audio/{path}")
         channel = mixer.music.play()
         while mixer.music.get_busy() == True:
             continue
 
 
-    elif data[0] == "render":
+    elif data[0] == "print":
         report.print_report(
             phone_no=phone_number, age=age, temperature=body_temp,
             heart_rate=heart_rate, spo2=spo2, eye_lens=eye_lens, has_cough=has_cough

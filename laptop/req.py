@@ -13,7 +13,7 @@ def send_data(phone_no, age, temperature, heart_rate, spo2, eye_lens, stat) -> N
                 spo2 += " *"
         
         if float(heart_rate) == 0.0:
-                heart_rate += " *"
+                heart_rate += "Not Tested"
         elif not (60.0<float(heart_rate)<100.0):
                 heart_rate += " *"
 

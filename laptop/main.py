@@ -2,7 +2,6 @@ import req
 import transfer_data
 from pygame import mixer
 import report
-import os
 
 mixer.init()
 mixer.music.set_volume(1)
@@ -18,18 +17,17 @@ has_cough = False
 
 
 def check_stat(temperature, heart_rate_, spo2_, eye_lens_):
-    if temperature != "" and float(temperature) > 100.0:
+    if float(temperature) != 0.0 and float(temperature) > 100.0:
         return False
 
-    if heart_rate_ != "" and float(heart_rate_) < 60.0:
+    if float(heart_rate_) != 0.0 and float(heart_rate_) < 60.0:
         return False
 
-    if spo2_ != "" and float(spo2_) < 95.0:
+    if float(spo2_) != 0.0 and float(spo2_) < 95.0:
         return False
 
-    if eye_lens_ != "" and float(eye_lens_) > 0:
+    if float(eye_lens_) != 0.0 and float(eye_lens_) > 0:
         return False
-    
 
 
 while True:
@@ -44,7 +42,8 @@ while True:
         has_cough = data[6]
         eye_lens = data[7]
         
-        print(has_cough)
+        print(type(has_cough))
+        print(type(body_temp))
 
 
     elif data[0] == "audio":

@@ -9,10 +9,8 @@ def get_precription(temperature, has_cough):
 
     if float(temperature) > 100:
         pres += "Paracitamol - napa extra"
-        
     if has_cough:
         pres += "Alatrol"
-    
     else:
         pres = "No prescription needed"
     
@@ -24,18 +22,18 @@ def print_report(phone_no, age, temperature, heart_rate, spo2, eye_lens, has_cou
     
     temp = temperature
 
-    if temperature == "":
+    if float(temperature) == 0.0:
         temperature = "Not Tested"
     elif float(temperature) > 100.0:
         temperature += " *"
     
-    if spo2 == "":
+    if float(spo2) == 0.0:
         spo2 = "Not Tested"
     elif float(spo2) < 95.0:
         spo2 += " *"
     
-    if heart_rate == "":
-        heart_rate += " *"
+    if float(heart_rate) == 0.0:
+        heart_rate = "Not Tested"
     elif not (60.0<float(heart_rate)<100.0):
         heart_rate += " *"
 

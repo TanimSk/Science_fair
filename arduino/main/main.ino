@@ -73,7 +73,7 @@ float distance;
 
 
 char key;
-String eye_check = "4854";
+String eye_check = "4137";
 String seen_value = "";
 
 
@@ -167,19 +167,25 @@ void loop() {
     ////////////////// AGE //////////////////
     lcd.clear();
     lcd.print("Your Age :     #");
-    lcd.setCursor(1, 1);
+    lcd.setCursor(7, 1);
     while (true) {
       key = customKeypad.getKey();
       if (key) {
         if (key == '#') {
           break;
         }
-        lcd.print(key);
-        Age += key;
-      }
-      if(key == 'D'){
-        Age.remove(Age.length() - 1);
-        lcd.print(Age);
+        else if (key == 'D') {
+          Age.remove(Age.length() - 1, 1);
+          lcd.clear();
+          lcd.setCursor(0, 0);
+          lcd.print("Your Age :     #");
+          lcd.setCursor(7, 1);
+          lcd.print(Age);
+        }
+        else {
+          lcd.print(key);
+          Age += key;
+        }
       }
     }
     ////////////////// -- //////////////////
@@ -239,7 +245,7 @@ void check_up() {
     lcd.setCursor(5, 1);
     lcd.print(Temp);
     if (Temp > 100) {
-      myservo3.write(25);
+      myservo3.write(10);
       delay(500);
       myservo3.write(90);
       delay(500);
@@ -265,20 +271,37 @@ void check_up() {
     play_audio("6.mp3");      //eye glass ejection audio
     lcd.print("Eye Checkup");
     delay(5000);
-    myservo4.write(35);
+
+    lcd.clear();
+    lcd.print("Enter:         #");
+    
+    myservo4.write(80);
     delay(200);
     lcd.setCursor(0, 1);
+    
     while (true) {
-      for (int c = 0; c < eye_check.length(); c++) {
-        while (true) {
-          key = customKeypad.getKey();
-          if (key) {
+      
+      while (true) {
+        key = customKeypad.getKey();
+        if (key) {
+          if (key == 'D') {
+            seen_value.remove(seen_value.length() - 1, 1);
+            lcd.clear();
+            lcd.setCursor(0, 0);
+            lcd.print("Enter:         #");
+            lcd.setCursor(0, 1);
+            lcd.print(seen_value);
+          }
+          else if (key == '#') {
+            break;
+          }
+          else {
             seen_value += key;
             lcd.print(key);
-            break;
           }
         }
       }
+      
       if (seen_value == eye_check) {
         play_audio("7.mp3"); //correct glass audio
         delay(4000);
@@ -298,7 +321,7 @@ void check_up() {
         lens_power += 0.25;
         delay(1000);
         lcd.clear();
-        lcd.print("Enter Again:");
+        lcd.print("Enter:         #");
         lcd.setCursor(0, 1);
       }
     }

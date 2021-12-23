@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
-// #include "MAX30105.h"
-// #include "spo2_algorithm.h"
+#include "MAX30105.h"
+#include "spo2_algorithm.h"
 
 Servo myservo1;//temp hand 11
 Servo myservo2;//max3102 hand 10
@@ -12,17 +12,17 @@ Servo myservo4; // glass hand 3
 
 
 ///////////  SPO2 Sensor + Heart Rate ///////////
-// #define MAX_BRIGHTNESS 255
-// #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-// uint16_t irBuffer[100];
-// uint16_t redBuffer[100];
-// #else
-// uint32_t irBuffer[100];
-// uint32_t redBuffer[100];
-// #endif
-// int32_t bufferLength;
-// int8_t validSPO2;
-// int8_t validHeartRate;
+ #define MAX_BRIGHTNESS 255
+ #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
+ uint16_t irBuffer[100];
+ uint16_t redBuffer[100];
+ #else
+ uint32_t irBuffer[100];
+ uint32_t redBuffer[100];
+ #endif
+ int32_t bufferLength;
+ int8_t validSPO2;
+ int8_t validHeartRate;
 
 
 //temperature A0 pin
@@ -49,7 +49,7 @@ Keypad customKeypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS)
 
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
-//MAX30105 particleSensor;
+MAX30105 particleSensor;
 
 
 
@@ -105,6 +105,7 @@ void setup() {
     }
   }
 }
+
 
 void loop() {
   digitalWrite(trigPin, LOW);
@@ -177,6 +178,8 @@ void loop() {
 
 
     lcd.clear();
+    lcd.print("choose service");
+    
     play_audio("2.mp3");  //ask for service and give option
     delay(10000);
     check_up();
@@ -209,19 +212,20 @@ void check_up() {
     delay(5000);
     myservo1.write(55);
     delay(500);
+    
     for (int i = 0; i < 50; i++) {
       Read = analogRead(A0);                //analog value Read
-      Read = (5.00 / 1023.00) * Read;      //Conversion to voltage
+      Read = (5.00 / 1023.00) * Read;       //Conversion to voltage
       VR = VCC - Read;
-      RT = Read / (VR / R);               //Resistance of RT
+      RT = Read / (VR / R);                 //Resistance of RT
 
       ln = log(RT / RT0);
-      Temp = (1 / ((ln / B) + (1 / T0))); //Temperature from sensor
+      Temp = (1 / ((ln / B) + (1 / T0)));   //Temperature from sensor
 
-      Temp = ((Temp - 273.15) * 1.8) + 41; //Conversion to Farenheit   32
-      //      Serial.println(Temp);
+      Temp = ((Temp - 273.15) * 1.8) + 41;  //Conversion to Farenheit   32
       delay(150);
     }
+    
     lcd.clear();
     lcd.print("Body Temperature");
     lcd.setCursor(5, 1);
@@ -302,7 +306,7 @@ void check_up() {
     delay(100);
     myservo2.write(0);
     delay(200);
-    // enable_sensor();
+    enable_sensor();
     lcd.clear();
     
     lcd.setCursor(0, 0);
@@ -335,7 +339,7 @@ void check_up() {
 
   else {
     lcd.print("wrong key!");
-    delay(1000);
+    delay(800);
     check_up();
   }
 

@@ -156,6 +156,10 @@ void loop() {
           break;
         }
       }
+      if(key == 'D'){
+        Phone_number.remove(Phone_number.length() - 1);
+        lcd.print(key);
+      }
     }
     /////////////-------//////////////
 
@@ -172,6 +176,10 @@ void loop() {
         }
         lcd.print(key);
         Age += key;
+      }
+      if(key == 'D'){
+        Age.remove(Age.length() - 1);
+        lcd.print(Age);
       }
     }
     ////////////////// -- //////////////////

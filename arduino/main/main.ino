@@ -5,8 +5,6 @@
 #include "MAX30105.h"
 #include "spo2_algorithm.h"
 
-Servo myservo1;//temp hand 11
-Servo myservo2;//max3102 hand 10
 Servo myservo3; //medicine hand 9
 Servo myservo4; // glass hand 3
 
@@ -80,13 +78,9 @@ String seen_value = "";
 
 void setup() {
   Setup_pins();
-  myservo1.attach(11);
-  myservo2.attach(10);
   myservo3.attach(9);
   myservo4.attach(3);
 
-  myservo1.write(0);
-  myservo2.write(55);
   myservo3.write(90);
   myservo4.write(0);
   delay(500);
@@ -141,8 +135,6 @@ void loop() {
     //////////////// PHONE NUMBER ////////////////
     lcd.print("Phone Number :  ");
     lcd.setCursor(1, 1);
-    myservo1.write(0);
-    myservo2.write(55);
     myservo3.write(90);
     myservo4.write(0);
     delay(100);
@@ -224,8 +216,6 @@ void check_up() {
     lcd.setCursor(2, 1);
     lcd.print("Please wait");
     delay(5000);
-    myservo1.write(55);
-    delay(500);
     
     for (int i = 0; i < 50; i++) {
       Read = analogRead(A0);                //analog value Read
@@ -252,7 +242,6 @@ void check_up() {
       play_audio("4.mp3");           //Please receive your medicine audio
       delay(6000);
     }
-    myservo1.write(0);
   }
 
   else if (key == 'B') {
@@ -334,9 +323,7 @@ void check_up() {
     lcd.print("Heart Rate");
     lcd.setCursor(2, 1);
     lcd.print("Please Wait");
-    delay(100);
-    myservo2.write(0);
-    delay(200);
+    delay(500);
     enable_sensor();
     lcd.clear();
     
@@ -345,8 +332,6 @@ void check_up() {
 
     lcd.setCursor(0, 1);
     lcd.print("spo2: "+ String(spo2));
-
-    myservo2.write(55);
   }
 
   else if (key == '#') {

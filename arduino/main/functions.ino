@@ -89,7 +89,7 @@ void print_report() {
      //After gathering 25 new samples recalculate HR and SP02
      maxim_heart_rate_and_oxygen_saturation(irBuffer, bufferLength, redBuffer, &spo2, &validSPO2, &heartRate, &validHeartRate);
 
-     if(validHeartRate == 1 && validSPO2 == 1){
+     if(validHeartRate == 1 && validSPO2 == 1 && spo2 <= 100){
        break;
      }
    }
